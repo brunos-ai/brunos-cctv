@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bruno's Barbers — CCTV Footage Request</title>
+  <link rel="stylesheet" href="/style.css" />
+  <!-- signature_pad: drawn signature on a canvas -->
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">Bruno's Barbers — CCTV Request</div>
+    <div class="userbox" id="userbox" hidden>
+      <span id="who"></span>
+      <button class="link" id="logout">Sign out</button>
+    </div>
+  </div>
+
+  <main>
+    <!-- ============= LOGIN ============= -->
+    <section class="card" id="step-name">
+      <h2>Sign in with Slack</h2>
+      <p class="muted">Enter your Bruno's Slack username. We'll DM you a 6-digit code.</p>
+      <label>Slack username</label>
+      <input type="text" id="slackName" placeholder="e.g. juan.delacruz" autocomplete="username" />
+      <button class="primary" id="sendCode">Send me a code</button>
+      <div class="msg" id="loginMsg"></div>
+    </section>
+
+    <section class="card hidden" id="step-code">
+      <h2>Enter your code</h2>
+      <p class="muted">Check your Slack DM from the bot.</p>
+      <label>6-digit code</label>
+      <input type="text" id="code" inputmode="numeric" maxlength="6" placeholder="123456" />
+      <button class="primary" id="verifyCode">Verify</button>
+      <button class="link" id="resendCode">Use a different name</button>
+      <div class="msg" id="codeMsg"></div>
+    </section>
+
+    <!-- ============= REQUEST FORM ============= -->
+    <section class="card hidden" id="step-form">
+      <h2>New CCTV footage request</h2>
+      <p class="muted">All times are in Philippine Time (UTC+8).</p>
+
+      <label>Full name <span class="req">*</span></label>
+      <input type="text" id="f_name" placeholder="Juan Dela Cruz" />
+
+      <label>Branch <span class="req">*</span></label>
+      <input type="text" id="f_branch" placeholder="e.g. SM Megamall" />
+
+      <div class="row">
+        <div class="col">
+          <label>Incident date <span class="req">*</span></label>
+          <input type="date" id="f_date" />
+        </div>
+        <div class="col">
+          <label>Incident time <span class="req">*</span></label>
+          <input type="time" id="f_time" />
+        </div>
+      </div>
+
+      <label>Area <span class="req">*</span></label>
+      <input type="text" id="f_area" placeholder="e.g. Cashier counter, Chair #3, Storeroom" />
+
+      <label>Description of event <span class="req">*</span></label>
+      <textarea id="f_event" rows="4" placeholder="What happened?"></textarea>
+
+      <label>Description of person involved <span class="req">*</span></label>
+      <textarea id="f_person" rows="3" placeholder="Appearance, clothing, distinguishing features..."></textarea>
+
+      <label>Initial status</label>
+      <select id="f_status">
+        <option>Open</option>
+        <option>In Progress</option>
+        <option>Resolved</option>
+        <option>Closed</option>
+      </select>
+
+      <label>Signature <span class="req">*</span></label>
+      <div class="sig-wrap">
+        <canvas id="sig" width="600" height="180"></canvas>
+        <button type="button" class="link sig-clear" id="sigClear">Clear</button>
+      </div>
+
+      <button class="primary" id="submitReq">Submit request</button>
+      <div class="msg" id="formMsg"></div>
+    </section>
+
+    <!-- ============= DASHBOARD ============= -->
+    <section class="card hidden" id="step-done">
+      <h2>Request submitted</h2>
+      <p>Your ticket number is <strong id="d_ticket"></strong>.</p>
+      <p class="muted" id="d_when"></p>
+      <button class="primary" id="newRequest">Submit another</button>
+      <button class="link" id="viewMine">View my requests</button>
+    </section>
+
+    <section class="card hidden" id="step-mine">
+      <h2>My requests</h2>
+      <div id="myList" class="mine"></div>
+      <button class="link" id="backToForm">New request</button>
+    </section>
+  </main>
+
+  <footer class="muted">
+    Asia/Manila (UTC+8). Times stored independently of your device.
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

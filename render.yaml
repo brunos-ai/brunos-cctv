@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: brunos-cctv-form
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: PUBLIC_URL
+        sync: false
+      - key: SLACK_BOT_TOKEN
+        sync: false
+      - key: SLACK_NOTIFY_CHANNEL
+        sync: false
+      - key: GOOGLE_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: GOOGLE_SHEET_ID
+        sync: false
+      - key: GOOGLE_SHEET_TAB
+        value: Requests
+      - key: GOOGLE_DRIVE_FOLDER_ID
+        sync: false
+      - key: MONDAY_API_TOKEN
+        sync: false
+      - key: MONDAY_BOARD_ID
+        sync: false
+      - key: MONDAY_COL_DATE
+        value: date
+      - key: MONDAY_COL_BRANCH
+        value: branch
+      - key: MONDAY_COL_STATUS
+        value: status
+      - key: MONDAY_COL_TICKET
+        value: ticket
