@@ -46,25 +46,14 @@ body {
 }
 .logo {
   display: inline-flex;
-  flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: var(--ink);
-  line-height: 0.95;
 }
-.logo-main {
-  font-family: var(--serif);
-  font-weight: 900;
-  font-size: 34px;
-  letter-spacing: 0.01em;
-}
-.logo-sub {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: 12px;
-  letter-spacing: 0.42em;
-  margin-top: 4px;
-  padding-left: 0.42em; /* visually center accounting for letter-spacing */
+.logo img {
+  display: block;
+  height: 56px;
+  width: auto;
+  /* Image is already pure black on transparent -- no filter needed */
 }
 
 .userbox {
@@ -251,8 +240,7 @@ footer {
 /* ======== Mobile tweaks ======== */
 @media (max-width: 560px) {
   .brandbar { padding: 18px 20px; }
-  .logo-main { font-size: 28px; }
-  .logo-sub { font-size: 10px; letter-spacing: 0.36em; }
+  .logo img { height: 42px; }
   .card { padding: 22px; }
   .row { flex-direction: column; gap: 0; }
   main { margin: 20px auto; }
