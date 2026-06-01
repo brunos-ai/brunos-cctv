@@ -80,8 +80,11 @@ $('logout').addEventListener('click', async () => {
 function onSignedIn(slackUserName) {
   $('userbox').hidden = false;
   $('who').textContent = '@' + slackUserName;
-  initForm(slackUserName);
+  // IMPORTANT: show the form FIRST, then init. If we init while step-form
+  // is still display:none, canvas.offsetWidth is 0 and SignaturePad ends up
+  // drawing into a zero-width buffer (= invisible strokes).
   show('step-form');
+  initForm(slackUserName);
 }
 
 // ------- Form -------
@@ -95,21 +98,26 @@ function initForm(slackUserName) {
   });
 
   // Signature pad
+  const canvas = $('sig');
   if (!signaturePad) {
-    const canvas = $('sig');
-    resizeSig(canvas);
-    window.addEventListener('resize', () => resizeSig(canvas));
     signaturePad = new SignaturePad(canvas, {
       backgroundColor: '#ffffff',
       penColor: '#111111',
+      minWidth: 1,
+      maxWidth: 2.5,
     });
+    window.addEventListener('resize', () => resizeSig(canvas));
   }
+  // Wait one frame so the freshly-shown section has laid out, then size the canvas.
+  // Without this, canvas.offsetWidth can momentarily read stale (0) on first show.
+  requestAnimationFrame(() => requestAnimationFrame(() => resizeSig(canvas)));
   $('sigClear').onclick = () => signaturePad.clear();
 }
 
 function resizeSig(canvas) {
   const ratio = Math.max(window.devicePixelRatio || 1, 1);
-  const cssW = canvas.offsetWidth;
+  // If parent is briefly display:none we'd get 0 -- fall back to a sane default.
+  const cssW = canvas.offsetWidth || canvas.parentElement.offsetWidth || 600;
   const cssH = 180;
   canvas.width = cssW * ratio;
   canvas.height = cssH * ratio;
