@@ -1,106 +1,195 @@
+/* ================================================
+   Bruno's Barbers — CCTV Form
+   Brand-aligned to brunosbarbers.com:
+   - Cream/white background
+   - Black serif wordmark (Playfair Display)
+   - Gold accent band (#c8a05c)
+   - Black primary buttons
+   ================================================ */
+
 :root {
-  --bg: #0f1115;
-  --panel: #1a1d24;
-  --panel-2: #232733;
-  --text: #e9ecf2;
-  --muted: #9aa3b2;
-  --accent: #d4a464;
-  --accent-2: #b88847;
-  --danger: #e06b6b;
-  --ok: #6ec48a;
-  --border: #2a2f3a;
+  --bg: #faf8f5;
+  --panel: #ffffff;
+  --panel-2: #f5f1ea;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --muted: #8a8579;
+  --gold: #c8a05c;
+  --gold-dark: #a6824a;
+  --border: #e6e0d4;
+  --danger: #b14a4a;
+  --ok: #4a7a4a;
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--sans);
   background: var(--bg);
-  color: var(--text);
+  color: var(--ink);
   min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.5;
 }
 
-.topbar {
+/* The native [hidden] attribute is otherwise overridden by display:flex below */
+[hidden] { display: none !important; }
+
+/* ======== Brand header ======== */
+.brandbar {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 14px 20px;
+  padding: 24px 32px;
+  background: #ffffff;
   border-bottom: 1px solid var(--border);
-  background: var(--panel);
 }
-.brand { font-weight: 600; letter-spacing: 0.3px; }
-.userbox { display: flex; gap: 12px; align-items: center; font-size: 14px; color: var(--muted); }
+.logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--ink);
+  line-height: 0.95;
+}
+.logo-main {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 34px;
+  letter-spacing: 0.01em;
+}
+.logo-sub {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.42em;
+  margin-top: 4px;
+  padding-left: 0.42em; /* visually center accounting for letter-spacing */
+}
 
+.userbox {
+  display: flex; gap: 14px; align-items: center;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.userbox #who { font-weight: 500; }
+
+/* ======== Gold band (matches the call-banner on brunosbarbers.com) ======== */
+.goldband {
+  background: var(--gold);
+  color: #1a1208;
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+/* ======== Layout ======== */
 main {
   max-width: 720px;
-  margin: 24px auto;
-  padding: 0 16px;
+  margin: 36px auto;
+  padding: 0 20px;
 }
 
 .card {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 22px;
-  margin-bottom: 18px;
+  border-radius: 4px;
+  padding: 32px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 .hidden { display: none !important; }
 
-h2 { margin: 0 0 8px; font-size: 20px; }
+h2 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 26px;
+  margin: 0 0 10px;
+  color: var(--ink);
+  letter-spacing: 0.005em;
+}
 .muted { color: var(--muted); font-size: 14px; }
 .req { color: var(--danger); }
 
-label { display: block; margin: 14px 0 6px; font-size: 14px; color: var(--muted); }
+/* ======== Form controls ======== */
+label {
+  display: block;
+  margin: 18px 0 8px;
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 input[type="text"], input[type="date"], input[type="time"], textarea, select {
   width: 100%;
-  background: var(--panel-2);
-  color: var(--text);
+  background: #ffffff;
+  color: var(--ink);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 12px;
+  border-radius: 2px;
+  padding: 12px 14px;
   font-size: 15px;
   font-family: inherit;
+  transition: border-color 0.15s;
 }
 textarea { resize: vertical; }
-input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--ink);
+}
 
-.row { display: flex; gap: 12px; }
+.row { display: flex; gap: 14px; }
 .col { flex: 1; }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
+button { font-family: inherit; cursor: pointer; }
+
+/* Primary CTA: black with optional gold hover — matches the "Book Appointment" button */
 button.primary {
-  margin-top: 18px;
-  background: var(--accent);
-  color: #1a1208;
+  margin-top: 24px;
+  background: var(--ink);
+  color: #ffffff;
   border: 0;
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 15px;
-  font-weight: 600;
+  border-radius: 2px;
+  padding: 14px 28px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.15s;
 }
-button.primary:hover { background: var(--accent-2); }
-button.primary:disabled { opacity: 0.5; cursor: not-allowed; }
+button.primary:hover { background: var(--gold-dark); }
+button.primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
 button.link {
   background: transparent;
-  color: var(--accent);
+  color: var(--gold-dark);
   border: 0;
-  padding: 8px 0;
-  margin-top: 8px;
-  font-size: 14px;
+  padding: 10px 0;
+  margin-top: 10px;
+  margin-left: 16px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
+button.link:hover { color: var(--ink); }
 
-.msg { margin-top: 12px; font-size: 14px; min-height: 18px; }
+.msg {
+  margin-top: 14px;
+  font-size: 14px;
+  min-height: 20px;
+}
 .msg.ok { color: var(--ok); }
 .msg.err { color: var(--danger); }
 
+/* ======== Signature pad ======== */
 .sig-wrap {
   position: relative;
-  background: #fff;
-  border-radius: 8px;
-  padding: 0;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 2px;
   overflow: hidden;
 }
 #sig {
@@ -108,32 +197,63 @@ button.link {
   width: 100%;
   height: 180px;
   touch-action: none;
+  background: #ffffff;
 }
 .sig-clear {
   position: absolute; top: 6px; right: 10px;
-  color: #555;
+  margin: 0;
+  color: var(--muted);
 }
 
+/* ======== Footer ======== */
 footer {
   text-align: center;
-  padding: 16px;
+  padding: 24px;
   font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+  background: #ffffff;
 }
 
-.mine { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+/* ======== My requests list ======== */
+.mine { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
 .mine .row-item {
   background: var(--panel-2);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px;
-  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  border-radius: 2px;
+  padding: 16px;
+  display: flex; justify-content: space-between; align-items: center; gap: 14px;
   flex-wrap: wrap;
 }
-.mine .ticket { font-weight: 600; }
-.mine .meta { font-size: 13px; color: var(--muted); }
-.mine select { width: auto; padding: 6px 10px; }
-.badge { padding: 3px 8px; border-radius: 999px; font-size: 12px; }
-.badge.Open { background: #364056; color: #cdd6e6; }
-.badge.In.Progress, .badge.InProgress { background: #5a4516; color: #f3d57f; }
-.badge.Resolved { background: #1f4a30; color: #95e0b1; }
-.badge.Closed { background: #2a2f3a; color: #9aa3b2; }
+.mine .ticket {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 16px;
+}
+.mine .meta { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.mine select { width: auto; padding: 8px 12px; }
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.badge.Open { background: #ebebeb; color: #3a3a3a; }
+.badge.In.Progress, .badge.InProgress { background: #fff3d6; color: #7a5a14; }
+.badge.Resolved { background: #d6e8d6; color: #2f5a2f; }
+.badge.Closed { background: #ebebeb; color: #8a8579; }
+
+/* ======== Mobile tweaks ======== */
+@media (max-width: 560px) {
+  .brandbar { padding: 18px 20px; }
+  .logo-main { font-size: 28px; }
+  .logo-sub { font-size: 10px; letter-spacing: 0.36em; }
+  .card { padding: 22px; }
+  .row { flex-direction: column; gap: 0; }
+  main { margin: 20px auto; }
+}

@@ -4,18 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bruno's Barbers — CCTV Footage Request</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
   <!-- signature_pad: drawn signature on a canvas -->
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
 </head>
 <body>
-  <div class="topbar">
-    <div class="brand">Bruno's Barbers — CCTV Request</div>
+  <header class="brandbar">
+    <a href="/" class="logo" aria-label="Bruno's Barbers">
+      <span class="logo-main">BRUNO'S</span>
+      <span class="logo-sub">BARBERS</span>
+    </a>
     <div class="userbox" id="userbox" hidden>
       <span id="who"></span>
       <button class="link" id="logout">Sign out</button>
     </div>
-  </div>
+  </header>
+
+  <div class="goldband">CCTV Footage Request System &middot; Internal Use Only</div>
 
   <main>
     <!-- ============= LOGIN ============= -->
@@ -40,7 +48,7 @@
 
     <!-- ============= REQUEST FORM ============= -->
     <section class="card hidden" id="step-form">
-      <h2>New CCTV footage request</h2>
+      <h2>New CCTV Footage Request</h2>
       <p class="muted">All times are in Philippine Time (UTC+8).</p>
 
       <label>Full name <span class="req">*</span></label>
@@ -83,13 +91,13 @@
         <button type="button" class="link sig-clear" id="sigClear">Clear</button>
       </div>
 
-      <button class="primary" id="submitReq">Submit request</button>
+      <button class="primary" id="submitReq">Submit Request</button>
       <div class="msg" id="formMsg"></div>
     </section>
 
     <!-- ============= DASHBOARD ============= -->
     <section class="card hidden" id="step-done">
-      <h2>Request submitted</h2>
+      <h2>Request Submitted</h2>
       <p>Your ticket number is <strong id="d_ticket"></strong>.</p>
       <p class="muted" id="d_when"></p>
       <button class="primary" id="newRequest">Submit another</button>
@@ -97,14 +105,14 @@
     </section>
 
     <section class="card hidden" id="step-mine">
-      <h2>My requests</h2>
+      <h2>My Requests</h2>
       <div id="myList" class="mine"></div>
       <button class="link" id="backToForm">New request</button>
     </section>
   </main>
 
-  <footer class="muted">
-    Asia/Manila (UTC+8). Times stored independently of your device.
+  <footer>
+    Asia/Manila (UTC+8) &middot; Times stored independently of your device.
   </footer>
 
   <script src="/app.js"></script>
